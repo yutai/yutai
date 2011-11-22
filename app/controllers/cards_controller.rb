@@ -1,6 +1,9 @@
 class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
+  before_filter :authenticate_user!
+  
+  
   def index
     @cards = Card.all
 
