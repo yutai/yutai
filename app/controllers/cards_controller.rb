@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   before_filter :authenticate_user!
-  
+  load_and_authorize_resource
   
   def index
     @cards = Card.all
@@ -33,11 +33,14 @@ class CardsController < ApplicationController
       format.html # new.html.erb
       format.json { render :json => @card }
     end
+    
   end
 
   # GET /cards/1/edit
   def edit
+    
     @card = Card.find(params[:id])
+    
   end
 
   # POST /cards
@@ -54,6 +57,7 @@ class CardsController < ApplicationController
         format.json { render :json => @card.errors, :status => :unprocessable_entity }
       end
     end
+    
   end
 
   # PUT /cards/1
@@ -70,6 +74,7 @@ class CardsController < ApplicationController
         format.json { render :json => @card.errors, :status => :unprocessable_entity }
       end
     end
+   
   end
 
   # DELETE /cards/1
@@ -82,5 +87,6 @@ class CardsController < ApplicationController
       format.html { redirect_to cards_url }
       format.json { head :ok }
     end
+    
   end
 end

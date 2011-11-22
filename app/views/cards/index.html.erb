@@ -6,9 +6,11 @@
     <th>Exp</th>
     <th>Code</th>
     <th>Name</th>
+    <% if can? :manage, @card %>
     <th></th>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
 
 <% @cards.each do |card| %>
@@ -17,13 +19,16 @@
     <td><%= card.exp %></td>
     <td><%= card.code %></td>
     <td><%= card.name %></td>
+    <% if can? :manage, @card %>
     <td><%= link_to 'Show', card %></td>
     <td><%= link_to 'Edit', edit_card_path(card) %></td>
     <td><%= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+<% if can? :manage, @card %>
 <%= link_to 'New Card', new_card_path %>
+<% end %>
